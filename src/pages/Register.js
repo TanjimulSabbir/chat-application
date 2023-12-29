@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { useRegisterMutation } from "../features/auth/authApi";
 import { useDispatch } from "react-redux";
 import toast from "react-hot-toast";
+import Error from "../components/ui/Error";
 
 export default function Register() {
     const [registerError, setRegisterError] = useState(false);
@@ -14,7 +15,13 @@ export default function Register() {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        dispatch(register(registerData))
+        if (registerData.password === registerData.confirmPassword) {
+            dispatch(register(registerData))
+        } else {
+            console.log(registerData)
+            setRegisterError("Password don't matched!");
+            toast.error("Password don't matched!")
+        }
     }
     const navigate = useNavigate();
     useEffect(() => {
@@ -120,7 +127,7 @@ export default function Register() {
                         <div className="flex items-center justify-between">
                             <div className="flex items-center">
                                 <input
-                                    
+
                                     onChange={(event) => setRegisterData((prev) => ({ ...prev, agreed: event.target.checked }))}
                                     required
                                     id="remember-me"
@@ -141,11 +148,13 @@ export default function Register() {
                             <button
                                 type="submit"
                                 className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-violet-600 hover:bg-violet-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-violet-500"
+                                disabled={isLoading}
                             >
                                 <span className="absolute left-0 inset-y-0 flex items-center pl-3"></span>
-                                Sign up
+                                {isLoading ? "Loading..." : "Sign up"}
                             </button>
                         </div>
+                        <Error message={registerError} />
                     </form>
                 </div>
             </div>
