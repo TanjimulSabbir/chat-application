@@ -3,6 +3,7 @@ import Conversation from "./pages/Conversation";
 import Inbox from "./pages/Inbox";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
+import { Toaster } from "react-hot-toast";
 
 function App() {
     return (
@@ -13,6 +14,7 @@ function App() {
                 <Route path="/inbox" element={<Conversation />} />
                 <Route path="/inbox/:id" element={<Inbox />} />
             </Routes>
+            <Toaster />
         </Router>
     );
 }

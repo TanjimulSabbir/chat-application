@@ -1,5 +1,7 @@
+import toast from "react-hot-toast";
 import { apiSlice } from "../Api/apiSlice";
 import { userLoggedIn } from "./authSlice";
+
 
 const authApi = apiSlice.injectEndpoints({
     endpoints: (builder) => ({
@@ -9,7 +11,7 @@ const authApi = apiSlice.injectEndpoints({
                 method: "POST",
                 body: data,
             }),
-            invalidatesTags: ["books"],
+            invalidatesTags: [""],
             async onQueryStarted(arg, { queryFulfilled, dispatch }) {
                 try {
                     const result = await queryFulfilled;
@@ -19,8 +21,9 @@ const authApi = apiSlice.injectEndpoints({
                     }
                     localStorage.setItem("auth", JSON.stringify({ ...authData }))
                     dispatch(userLoggedIn({ ...authData }))
+                    toast.success("Register Successful!")
                 } catch (error) {
-
+                    console.log(error.message)
                 }
             }
         }),
@@ -30,7 +33,7 @@ const authApi = apiSlice.injectEndpoints({
                 method: "POST",
                 body: data,
             }),
-            invalidatesTags: ["books"],
+            invalidatesTags: [""],
             async onQueryStarted(arg, { queryFulfilled, dispatch }) {
                 try {
                     const result = await queryFulfilled;
@@ -41,7 +44,7 @@ const authApi = apiSlice.injectEndpoints({
                     localStorage.setItem("auth", JSON.stringify({ ...authData }))
                     dispatch(userLoggedIn({ ...authData }))
                 } catch (error) {
-
+                    console.log(error.message)
                 }
             }
         }),

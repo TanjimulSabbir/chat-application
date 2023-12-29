@@ -1,20 +1,37 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import logoImage from "../assets/images/lws-logo-light.svg";
 import Error from "../components/ui/Error";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useLoginMutation } from "../features/auth/authApi";
 import { useDispatch } from "react-redux";
+import toast from "react-hot-toast";
 
 export default function Login() {
+    const [loginError, setLoginError] = useState(false);
     const [loginData, setLoginData] = useState({});
     const [login, { data, isLoading, isError, error }] = useLoginMutation();
     const dispatch = useDispatch();
 
+    const navigate = useNavigate();
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        dispatch(login(loginData))
+        if (loginData.email && loginData.password) {
+            dispatch(login(loginData))
+        } else {
+            toast.error("Input invalid!")
+        }
     }
+    useEffect(() => {
+        if (isError) {
+            setLoginError(error.data)
+            toast.error(error.data)
+        }
+        if (data?.accessToken && data?.user) {
+            toast.success("Login Successful!")
+            navigate("/inbox")
+        }
+    }, [data, navigate, error, isError])
     return (
         <div className="grid place-items-center h-screen bg-[#F9FAFB">
             <div className="min-h-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
@@ -84,12 +101,13 @@ export default function Login() {
                             <button
                                 type="submit"
                                 className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-violet-600 hover:bg-violet-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-violet-500"
+                                disabled={isLoading}
                             >
-                                Sign in
+                                {isLoading ? "Loading..." : "Sign in"}
                             </button>
                         </div>
 
-                        <Error message="There was an error" />
+                        <Error message={loginError} />
                     </form>
                 </div>
             </div>

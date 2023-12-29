@@ -1,11 +1,13 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import logoImage from "../assets/images/lws-logo-light.svg";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useRegisterMutation } from "../features/auth/authApi";
 import { useDispatch } from "react-redux";
+import toast from "react-hot-toast";
 
 export default function Register() {
-    const [registerData, setRegisterData] = useState({});
+    const [registerError, setRegisterError] = useState(false);
+    const [registerData, setRegisterData] = useState({ checked: false });
     const [register, { data, isLoading, isError, error }] = useRegisterMutation();
     const dispatch = useDispatch();
 
@@ -14,6 +16,17 @@ export default function Register() {
         event.preventDefault();
         dispatch(register(registerData))
     }
+    const navigate = useNavigate();
+    useEffect(() => {
+        if (isError) {
+            setRegisterError(error.data)
+            toast.error(error.data)
+        }
+        if (data?.accessToken && data?.user) {
+            toast.success("Login Successful!")
+            navigate("/inbox")
+        }
+    }, [data, navigate, error, isError])
     return (
         <div className="grid place-items-center h-screen bg-[#F9FAFB">
             <div className="min-h-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
@@ -107,7 +120,9 @@ export default function Register() {
                         <div className="flex items-center justify-between">
                             <div className="flex items-center">
                                 <input
-
+                                    
+                                    onChange={(event) => setRegisterData((prev) => ({ ...prev, agreed: event.target.checked }))}
+                                    required
                                     id="remember-me"
                                     name="remember-me"
                                     type="checkbox"
