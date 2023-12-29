@@ -1,8 +1,20 @@
 import { Link } from "react-router-dom";
 import logoImage from "../assets/images/lws-logo-light.svg";
 import Error from "../components/ui/Error";
+import { useState } from "react";
+import { useLoginMutation } from "../features/auth/authApi";
+import { useDispatch } from "react-redux";
 
 export default function Login() {
+    const [loginData, setLoginData] = useState({});
+    const [login, { data, isLoading, isError, error }] = useLoginMutation();
+    const dispatch = useDispatch();
+
+
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        dispatch(login(loginData))
+    }
     return (
         <div className="grid place-items-center h-screen bg-[#F9FAFB">
             <div className="min-h-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
@@ -19,7 +31,7 @@ export default function Login() {
                             Sign in to your account
                         </h2>
                     </div>
-                    <form className="mt-8 space-y-6" action="#" method="POST">
+                    <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
                         <input type="hidden" name="remember" value="true" />
                         <div className="rounded-md shadow-sm -space-y-px">
                             <div>
@@ -30,6 +42,7 @@ export default function Login() {
                                     Email address
                                 </label>
                                 <input
+                                    onChange={(event) => setLoginData((prev) => ({ ...prev, email: event.target.value }))}
                                     id="email-address"
                                     name="email"
                                     type="email"
@@ -44,6 +57,7 @@ export default function Login() {
                                     Password
                                 </label>
                                 <input
+                                    onChange={(event) => setLoginData((prev) => ({ ...prev, password: event.target.value }))}
                                     id="password"
                                     name="password"
                                     type="password"

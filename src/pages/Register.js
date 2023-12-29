@@ -1,7 +1,19 @@
 import { Link } from "react-router-dom";
 import logoImage from "../assets/images/lws-logo-light.svg";
+import { useState } from "react";
+import { useRegisterMutation } from "../features/auth/authApi";
+import { useDispatch } from "react-redux";
 
 export default function Register() {
+    const [registerData, setRegisterData] = useState({});
+    const [register, { data, isLoading, isError, error }] = useRegisterMutation();
+    const dispatch = useDispatch();
+
+
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        dispatch(register(registerData))
+    }
     return (
         <div className="grid place-items-center h-screen bg-[#F9FAFB">
             <div className="min-h-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
@@ -18,7 +30,7 @@ export default function Register() {
                             Create your account
                         </h2>
                     </div>
-                    <form className="mt-8 space-y-6" action="#" method="POST">
+                    <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
                         <input type="hidden" name="remember" value="true" />
                         <div className="rounded-md shadow-sm -space-y-px">
                             <div>
@@ -26,6 +38,7 @@ export default function Register() {
                                     Full Name
                                 </label>
                                 <input
+                                    onChange={(event) => setRegisterData((prev) => ({ ...prev, name: event.target.value }))}
                                     id="name"
                                     name="Name"
                                     type="Name"
@@ -44,6 +57,7 @@ export default function Register() {
                                     Email address
                                 </label>
                                 <input
+                                    onChange={(event) => setRegisterData((prev) => ({ ...prev, email: event.target.value }))}
                                     id="email-address"
                                     name="email"
                                     type="email"
@@ -59,6 +73,7 @@ export default function Register() {
                                     Password
                                 </label>
                                 <input
+                                    onChange={(event) => setRegisterData((prev) => ({ ...prev, password: event.target.value }))}
                                     id="password"
                                     name="password"
                                     type="password"
@@ -77,6 +92,7 @@ export default function Register() {
                                     Confirm Password
                                 </label>
                                 <input
+                                    onChange={(event) => setRegisterData((prev) => ({ ...prev, confirmPassword: event.target.value }))}
                                     id="confirmPassword"
                                     name="confirmPassword"
                                     type="confirmPassword"
@@ -91,6 +107,7 @@ export default function Register() {
                         <div className="flex items-center justify-between">
                             <div className="flex items-center">
                                 <input
+
                                     id="remember-me"
                                     name="remember-me"
                                     type="checkbox"

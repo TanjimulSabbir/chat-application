@@ -11,4 +11,6 @@ export const store = configureStore({
     coversations: conversationsSlice,
     messages: messagesSlice
   },
+  middleware:(getDefaultMiddlewares)=>getDefaultMiddlewares().concat(apiSlice.middleware)
 });
+
