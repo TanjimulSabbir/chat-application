@@ -107,7 +107,7 @@ export default function Login() {
                             </button>
                         </div>
 
-                        <Error message={loginError} />
+                        {loginError && <Error message={loginError} />}
                     </form>
                 </div>
             </div>

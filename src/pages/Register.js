@@ -30,7 +30,7 @@ export default function Register() {
             toast.error(error.data)
         }
         if (data?.accessToken && data?.user) {
-            toast.success("Login Successful!")
+            toast.success("Register Successful!")
             navigate("/inbox")
         }
     }, [data, navigate, error, isError])
@@ -154,7 +154,7 @@ export default function Register() {
                                 {isLoading ? "Loading..." : "Sign up"}
                             </button>
                         </div>
-                        <Error message={registerError} />
+                        {registerError && <Error message={registerError} />}
                     </form>
                 </div>
             </div>
