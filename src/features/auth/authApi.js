@@ -1,4 +1,5 @@
 import { apiSlice } from "../Api/apiSlice";
+import { userLoggedIn } from "./authSlice";
 
 const authApi = apiSlice.injectEndpoints({
     endpoints: (builder) => ({
@@ -9,6 +10,19 @@ const authApi = apiSlice.injectEndpoints({
                 body: data,
             }),
             invalidatesTags: ["books"],
+            async onQueryStarted(arg, { queryFulfilled, dispatch }) {
+                try {
+                    const result = await queryFulfilled;
+                    const authData = {
+                        accessToken: result.data.accessToken,
+                        user: result.data.user
+                    }
+                    localStorage.setItem("auth", JSON.stringify({ ...authData }))
+                    dispatch(userLoggedIn({ ...authData }))
+                } catch (error) {
+
+                }
+            }
         }),
         login: builder.mutation({
             query: (data) => ({
@@ -17,7 +31,19 @@ const authApi = apiSlice.injectEndpoints({
                 body: data,
             }),
             invalidatesTags: ["books"],
-            
+            async onQueryStarted(arg, { queryFulfilled, dispatch }) {
+                try {
+                    const result = await queryFulfilled;
+                    const authData = {
+                        accessToken: result.data.accessToken,
+                        user: result.data.user
+                    }
+                    localStorage.setItem("auth", JSON.stringify({ ...authData }))
+                    dispatch(userLoggedIn({ ...authData }))
+                } catch (error) {
+
+                }
+            }
         }),
     })
 })
