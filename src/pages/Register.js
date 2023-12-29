@@ -8,7 +8,7 @@ import Error from "../components/ui/Error";
 
 export default function Register() {
     const [registerError, setRegisterError] = useState(false);
-    const [registerData, setRegisterData] = useState({ checked: false });
+    const [registerData, setRegisterData] = useState({ });
     const [register, { data, isLoading, isError, error }] = useRegisterMutation();
     const dispatch = useDispatch();
 
