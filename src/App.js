@@ -5,6 +5,8 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import { Toaster } from "react-hot-toast";
 import useAuthCheck from "./hooks/useAuthCheck";
+import PrivateRoute from "./components/SpecialRoutes/PrivateRoute";
+
 
 function App() {
     const authChecked = useAuthCheck();
@@ -13,8 +15,8 @@ function App() {
             <Routes>
                 <Route path="/" element={<Login />} />
                 <Route path="/register" element={<Register />} />
-                <Route path="/inbox" element={<Conversation />} />
-                <Route path="/inbox/:id" element={<Inbox />} />
+                <Route path="/inbox" element={<PrivateRoute><Conversation /></PrivateRoute>} />
+                <Route path="/inbox/:id" element={<PrivateRoute><Inbox /></PrivateRoute>} />
             </Routes>
             <Toaster />
         </Router> : <div className="flex items-center justify-center text-green-500 text-2xl min-h-screen">User Authorization checking...</div>
