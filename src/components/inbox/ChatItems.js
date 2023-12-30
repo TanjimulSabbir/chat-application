@@ -4,7 +4,9 @@ import ChatItem from "./ChatItem";
 
 export default function ChatItems() {
     const { user } = useSelector((state) => state.auth)
-    const { data, isLoading, isError, error } = useConversationsQuery(user?.email);
+    const { email } = user;
+    const { data, isLoading, isError, error } = useConversationsQuery(email);
+
     console.log(data, "from chatItems")
     return (
         <ul>

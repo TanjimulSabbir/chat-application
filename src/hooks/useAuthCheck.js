@@ -12,9 +12,9 @@ function useAuthCheck() {
             dispatch(userLoggedIn(auth))
 
         }
-       setTimeout(() => {
+
         setAuthChecked(true)
-       }, 3000);
+
     }, [dispatch])
 
     return authChecked;
