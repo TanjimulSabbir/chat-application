@@ -10,11 +10,8 @@ function useAuthCheck() {
         console.log(auth, "auth from localstorage in useAuthCheck")
         if (auth?.accessToken && auth?.user) {
             dispatch(userLoggedIn(auth))
-
         }
-
         setAuthChecked(true)
-
     }, [dispatch])
 
     return authChecked;

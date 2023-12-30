@@ -5,7 +5,8 @@ export const apiSlice = createApi({
     baseQuery: fetchBaseQuery({
         baseUrl: process.env.REACT_APP_API_URL,
         prepareHeaders: async (headers, { getState, endpoint }) => {
-            const token = getState?.auth?.accessToken;
+            const token = getState().auth?.accessToken;
+            console.log(token,"from apiSlice")
             if (token) {
                 headers.set("Authorization",`Bearer ${token}`)
             }

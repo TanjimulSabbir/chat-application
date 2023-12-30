@@ -6,7 +6,7 @@ const conversationsApi = apiSlice.injectEndpoints({
             query: (email) => {
                 console.log(email);
                 return {
-                    url: `/conversations?participants_like=${email}&_sort=timestamp&_order=desc&_page=1&_limit=${process.env.REACT_APP_API_CONVERSATION_PER_PAGE}`,
+                    url: `/conversations?participants_like=${email}&_sort=timestamp&_order=desc&_page=1`,
                 };
             },
         }),

@@ -3,21 +3,19 @@ import logoImage from "../assets/images/lws-logo-light.svg";
 import Error from "../components/ui/Error";
 import { useEffect, useState } from "react";
 import { useLoginMutation } from "../features/auth/authApi";
-import { useDispatch } from "react-redux";
 import toast from "react-hot-toast";
 
 export default function Login() {
     const [loginError, setLoginError] = useState(false);
     const [loginData, setLoginData] = useState({});
     const [login, { data, isLoading, isError, error }] = useLoginMutation();
-    const dispatch = useDispatch();
 
     const navigate = useNavigate();
 
     const handleSubmit = (event) => {
         event.preventDefault();
         if (loginData.email && loginData.password) {
-            dispatch(login(loginData))
+            login(loginData)
         } else {
             toast.error("Input invalid!")
         }

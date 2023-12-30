@@ -10,13 +10,11 @@ export default function Register() {
     const [registerError, setRegisterError] = useState(false);
     const [registerData, setRegisterData] = useState({ });
     const [register, { data, isLoading, isError, error }] = useRegisterMutation();
-    const dispatch = useDispatch();
-
 
     const handleSubmit = (event) => {
         event.preventDefault();
         if (registerData.password === registerData.confirmPassword) {
-            dispatch(register(registerData))
+            register(registerData)
         } else {
             console.log(registerData)
             setRegisterError("Password don't matched!");
