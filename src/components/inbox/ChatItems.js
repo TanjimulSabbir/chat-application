@@ -18,10 +18,11 @@ export default function ChatItems() {
     if (!isLoading && !isError && conversations.length === 0) content = <div>No Conversation Found!</div>
     if (!isLoading && !isError && conversations.length > 0) {
         content = conversations.map(conversation => {
-            const { message, timestamp } = conversation;
+            const { id, message, timestamp } = conversation;
             const { name, email } = PartnerInfo({ participants: conversation?.users, email: myEmail })
             return <li>
                 <ChatItem
+                    id={id}
                     avatar={gravatarUrl(email, { size: 80 })}
                     name={name}
                     lastMessage={message}

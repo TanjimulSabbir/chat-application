@@ -1,10 +1,10 @@
 import { Link } from "react-router-dom";
 
-export default function ChatItem({ avatar, name, lastMessage, lastTime }) {
+export default function ChatItem({id ,avatar, name, lastMessage, lastTime }) {
     return (
         <Link
             className="flex items-center px-3 py-2 text-sm transition duration-150 ease-in-out border-b border-gray-300 cursor-pointer hover:bg-gray-100 focus:outline-none"
-            to="/"
+            to={`/inbox/${id}`}
         >
             <img
                 className="object-cover w-10 h-10 rounded-full"

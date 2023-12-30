@@ -4,10 +4,10 @@ function PrivateRoute({ children }) {
     const auth = JSON.parse(localStorage?.getItem("auth"));
     const navigate = useNavigate();
     
-    if (auth?.accessToken && auth?.user) {
+    if (auth.accessToken && auth.user) {
         return children;
     } else {
-      return navigate("/")
+       navigate("/")
     }
 
 }
