@@ -42,6 +42,14 @@
       "confirmPassword": "123456",
       "agreed": true,
       "id": 7
+    },
+    {
+      "email": "tanzimulislamsabb6ir@gmail.com",
+      "password": "$2a$10$yQsSCJ7I1S89wo4kc45I8uHVpA5KBwmS7SeyMgqmkSWBG0xOQ/38C",
+      "name": "Tanjimul Islam Sabbir",
+      "confirmPassword": "123456",
+      "agreed": true,
+      "id": 8
     }
   ],
   "conversations": [
