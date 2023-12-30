@@ -3,11 +3,13 @@ import { useConversationsQuery } from "../../features/conversations/conversation
 import ChatItem from "./ChatItem";
 import Error from "../ui/Error";
 import moment from "moment";
+import PartnerInfo from "../utils/PartnerInfo";
+import gravatarUrl from "gravatar-url";
 
 export default function ChatItems() {
     const { user } = useSelector((state) => state.auth)
-    const { email } = user;
-    const { data: conversations, isLoading, isError, error } = useConversationsQuery(email);
+    const { email: myEmail } = user;
+    const { data: conversations, isLoading, isError, error } = useConversationsQuery(myEmail);
 
     let content = null;
 
@@ -16,11 +18,12 @@ export default function ChatItems() {
     if (!isLoading && !isError && conversations.length === 0) content = <div>No Conversation Found!</div>
     if (!isLoading && !isError && conversations.length > 0) {
         content = conversations.map(conversation => {
-            const { message, timestamp } = conversation
+            const { message, timestamp } = conversation;
+            const { name, email } = PartnerInfo({ participants: conversation?.users, email: myEmail })
             return <li>
                 <ChatItem
-                    avatar="https://cdn.pixabay.com/photo/2018/09/12/12/14/man-3672010__340.jpg"
-                    name="Saad Hasan"
+                    avatar={gravatarUrl(email, { size: 80 })}
+                    name={name}
                     lastMessage={message}
                     lastTime={moment(timestamp).fromNow()}
                 />
