@@ -1,5 +1,5 @@
 import { useState } from "react";
-import ChatItems from "./ChatIItems";
+import ChatItems from "./ChatItems";
 import Modal from "./Modal";
 // import Blank from "./Blank";
 
