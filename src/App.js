@@ -6,6 +6,7 @@ import Register from "./pages/Register";
 import { Toaster } from "react-hot-toast";
 import useAuthCheck from "./hooks/useAuthCheck";
 import PrivateRoute from "./components/SpecialRoutes/PrivateRoute";
+import PublicRoute from "./components/SpecialRoutes/PublicRoute";
 
 
 function App() {
@@ -13,8 +14,8 @@ function App() {
     return (
         authChecked ? <Router>
             <Routes>
-                <Route path="/" element={<Login />} />
-                <Route path="/register" element={<Register />} />
+                <Route path="/" element={<PublicRoute> <Login /></PublicRoute>} />
+                <Route path="/register" element={<PublicRoute><Register /></PublicRoute>} />
                 <Route path="/inbox" element={<PrivateRoute><Conversation /></PrivateRoute>} />
                 <Route path="/inbox/:id" element={<PrivateRoute><Inbox /></PrivateRoute>} />
             </Routes>

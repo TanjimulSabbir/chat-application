@@ -8,7 +8,6 @@ export default function Navigation() {
     const handleLogout = () => {
         localStorage.clear();
         dispatch(userLoggedOut())
-        Navigate({ to: "/" })
     }
     return (
         <nav className="border-general sticky top-0 z-40 border-b bg-violet-700 transition-colors">
@@ -22,9 +21,9 @@ export default function Navigation() {
                         />
                     </Link>
                     <ul>
-                        <li className="text-white" onClick={() => handleLogout()}>
+                        <Link to={"/"} className="text-white cursor-pointer" onClick={handleLogout}>
                             <span>Logout</span>
-                        </li>
+                        </Link>
                     </ul>
                 </div>
             </div>

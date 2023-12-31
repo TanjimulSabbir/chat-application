@@ -1,13 +1,12 @@
-import { useNavigate } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 
 function PublicRoute({ children }) {
     const auth = JSON.parse(localStorage?.getItem("auth"));
 
-    const navigate = useNavigate();
-    if (auth?.accessToken && auth?.user) {
-        return navigate("/inbox")
+    if (auth?.user && auth?.accessToken) {
+        return <Navigate to="/inbox" />
     } else {
-        return navigate("/");
+        return children;
     }
 }
 
