@@ -13,7 +13,7 @@ export default function ChatItems() {
 
     let content = null;
 
-    if (isLoading) content = <isLoading />
+    if (isLoading) content = <>Loading...</>
     if (!isLoading && isError) content = <Error />
     if (!isLoading && !isError && conversations.length === 0) content = <div>No Conversation Found!</div>
     if (!isLoading && !isError && conversations.length > 0) {

@@ -7,49 +7,20 @@
       "id": 1
     },
     {
-      "email": "akash@learnwithsumit.com",
-      "password": "$2a$10$CtHS.yCGS80jiuZx8yKEI.5zdiZykHF/6aPTDqpHl6ZqEFGISOHKO",
-      "name": "Akash Ahmed",
+      "email": "tanzimulislamsabbir@gmail.com",
+      "password": "$2a$10$uE/U0hjQ3kQXuWOc8qWKK.G45CXm0NsTl3fdJ4s8XiZeu5EsN1lUK",
+      "name": "Tanjimul Islam Sabbir",
+      "confirmPassword": "123456",
+      "agreed": true,
       "id": 2
     },
     {
-      "email": "saad@learnwithsumit.com",
-      "password": "$2a$10$CtHS.yCGS80jiuZx8yKEI.5zdiZykHF/6aPTDqpHl6ZqEFGISOHKO",
-      "name": "Saad Hasan",
-      "id": 3
-    },
-    {
-      "email": "tanzimulislamsabbir@gmail.com",
-      "password": "$2a$10$Jvgezx4Z7/4aq87XqbZpBety78MsZEViC86sAg4Mzx6rTdy1qfhX2",
-      "name": "Tanjimul Islam Sabbir",
-      "confirmPassword": "123456",
-      "id": 5
-    },
-    {
-      "email": "tanzimulislamsabbir.dev@gmail.com",
-      "password": "$2a$10$rXQElBmkFbk6m1kF9XCLFe47n2drwDxHYeq0/QtCpmpUXN9xzh3qe",
-      "checked": false,
-      "agreed": true,
-      "name": "Tanjimul Islam Sabbir",
-      "confirmPassword": "123456",
-      "id": 6
-    },
-    {
       "email": "tanjimulsabbir.dev@gmail.com",
-      "password": "$2a$10$UDF/D8j9C83WGA3xFu8Zn.1l24sP06PrSz8dY1pi35mRqfqXLecee",
-      "checked": false,
-      "name": "Tanjimul Islam Sabbir",
+      "password": "$2a$10$iEKjtxfK4M3Uoe2EhRvXO.6jPRlbWWr6x3CExKXfg0vq1veA/vd9y",
+      "name": "Sabbir Developer",
       "confirmPassword": "123456",
       "agreed": true,
-      "id": 7
-    },
-    {
-      "email": "tanzimulislamsabb6ir@gmail.com",
-      "password": "$2a$10$yQsSCJ7I1S89wo4kc45I8uHVpA5KBwmS7SeyMgqmkSWBG0xOQ/38C",
-      "name": "Tanjimul Islam Sabbir",
-      "confirmPassword": "123456",
-      "agreed": true,
-      "id": 8
+      "id": 3
     }
   ],
   "conversations": [
@@ -64,7 +35,7 @@
         },
         {
           "email": "tanzimulislamsabbir@gmail.com",
-          "name": "Akash Ahmed",
+          "name": "Tanjimul Sabbir",
           "id": 2
         }
       ],
@@ -73,7 +44,7 @@
     },
     {
       "id": 2,
-      "participants": "sumit@learnwithsumit.com-tanzimulislamsabbir@gmail.com",
+      "participants": "sumit@learnwithsumit.com-tanjimulsabbir.dev@gmail.com",
       "users": [
         {
           "email": "sumit@learnwithsumit.com",
@@ -81,12 +52,30 @@
           "id": 1
         },
         {
-          "email": "tanzimulislamsabbir@gmail.com",
-          "name": "Saad Hasan",
+          "email": "tanjimulsabbir.dev@gmail.com",
+          "name": "Sabbir Developer",
           "id": 3
         }
       ],
       "message": "How are you?",
+      "timestamp": 1661976143678
+    },
+    {
+      "id": 3,
+      "participants": "tanzimulislamsabbir@gmail.com-tanjimulsabbir.dev@gmail.com",
+      "users": [
+        {
+          "email": "tanzimulislamsabbir@gmail.com",
+          "name": "Tanjimul Sabbir",
+          "id": 1
+        },
+        {
+          "email": "tanjimulsabbir.dev@gmail.com",
+          "name": "Sabbir Developer",
+          "id": 3
+        }
+      ],
+      "message": "Hey?",
       "timestamp": 1661976143678
     }
   ],
@@ -101,7 +90,7 @@
       },
       "receiver": {
         "email": "tanzimulislamsabbir@gmail.com",
-        "name": "Akash Ahmed",
+        "name": "Tanjimul Sabbir",
         "id": 2
       },
       "message": "Hello",
@@ -112,7 +101,7 @@
       "conversationId": 1,
       "sender": {
         "email": "tanzimulislamsabbir@gmail.com",
-        "name": "Akash Ahmed",
+        "name": "Tanjimul Sabbir",
         "id": 2
       },
       "receiver": {
@@ -121,6 +110,22 @@
         "id": 1
       },
       "message": "How are you?",
+      "timestamp": 1661976143678
+    },
+    {
+      "id": 3,
+      "conversationId": 3,
+      "sender": {
+        "email": "tanzimulislamsabbir@gmail.com",
+        "name": "Tanjimul Sabbir",
+        "id": 2
+      },
+      "receiver": {
+        "email": "tanjimulsabbir.dev@gmail.com",
+        "name": "Sabbir Developer",
+        "id": 3
+      },
+      "message": "Hey?",
       "timestamp": 1661976143678
     }
   ]
