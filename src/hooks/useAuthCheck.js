@@ -13,7 +13,7 @@ function useAuthCheck() {
         }
         setAuthChecked(true)
     }, [dispatch])
-
+    
     return authChecked;
 }
 
