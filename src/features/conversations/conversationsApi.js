@@ -27,6 +27,8 @@ const conversationsApi = apiSlice.injectEndpoints({
 
 })
 
-export const { useConversationsQuery,
+export const {
+    useConversationsQuery,
     useFindCoversationByEmailQuery,
-    useEditSpecifiedCoversationMutation } = conversationsApi;
+    useEditSpecifiedCoversationMutation
+} = conversationsApi;
