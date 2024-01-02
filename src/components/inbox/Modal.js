@@ -36,10 +36,7 @@ export default function Modal({ open, control }) {
         }
     }
 
-
-
     const handleEmail = (event) => {
-
         const checkedEmail = IsValidEmail(event);
         if (checkedEmail) {
             setMessageData((prev) => ({ ...prev, email: event }));
@@ -49,7 +46,11 @@ export default function Modal({ open, control }) {
         }
     }
 
-    const getClicked = debounce(handleEmail, 700)
+    const getClicked = debounce(handleEmail, 700);
+
+    const handleMessages = (event) => {
+        event.preventDefault();
+    }
 
 
     return (
@@ -63,7 +64,7 @@ export default function Modal({ open, control }) {
                     <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
                         Send message
                     </h2>
-                    <form className="mt-8 space-y-6" onSubmit={() => getClicked()}>
+                    <form className="mt-8 space-y-6" onSubmit={handleMessages}>
                         <input type="hidden" name="remember" value="true" />
                         <div className="rounded-md shadow-sm -space-y-px">
                             <div>
