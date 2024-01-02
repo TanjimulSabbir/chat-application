@@ -8,19 +8,21 @@ export default function Modal({ open, control }) {
 
 
     const debounce = (fn, delay) => {
-        return () => {
-            setTimeout(() => {
-                return handleMessage()
+        let timeoutId;
+        return (...args) => {
+            clearTimeout(timeoutId)
+            timeoutId = setTimeout(() => {
+                fn(...args)
             }, delay);
         }
     }
 
-    const handleMessage = (event) => {
-        event.preventDefault();
-        console.log("Btn Clicked")
+    const handleEmail = (event) => {
+        setMessageData((prev) => ({ ...prev, email: event.target.value }));
+        console.log(messageData, "email debounce")
     }
 
-    const getClicked = debounce(handleMessage, 3000)
+    const getClicked = debounce(handleEmail, 700)
 
 
     return (
@@ -42,7 +44,7 @@ export default function Modal({ open, control }) {
                                     To
                                 </label>
                                 <input
-                                    onChange={(event) => setMessageData((prev) => ({ ...prev, email: event.target.value }))}
+                                    onChange={(event) => getClicked(event)}
                                     id="to"
                                     name="to"
                                     type="email"
