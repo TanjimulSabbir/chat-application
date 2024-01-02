@@ -20,22 +20,23 @@ export default function ChatItems() {
         content = conversations.map(conversation => {
             const { id, message, timestamp } = conversation;
             const { name, email } = PartnerInfo({ participants: conversation?.users, email: myEmail })
-            return <li>
+            return <ul key={id}> <li>
                 <ChatItem
+
                     id={id}
                     avatar={gravatarUrl(email, { size: 80 })}
                     name={name}
                     lastMessage={message}
                     lastTime={moment(timestamp).fromNow()}
                 />
-            </li>
+            </li></ul>
         })
     }
 
 
     return (
-        <ul>
+        <>
             {content}
-        </ul>
+        </>
     );
 }

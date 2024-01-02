@@ -6,13 +6,23 @@ export default function Modal({ open, control }) {
     // const [specifiedUser, { data, isLoading, error }] = useSpecifiedUserQuery();
     const [messageData, setMessageData] = useState({});
 
-    // if (isLoading) return <div>Loading..</div>
-    // console.log(error, "from modal");
+
+    const debounce = (fn, delay) => {
+        return () => {
+            setTimeout(() => {
+                return handleMessage()
+            }, delay);
+        }
+    }
 
     const handleMessage = (event) => {
         event.preventDefault();
-        // specifiedUser(messageData.email)
+        console.log("Btn Clicked")
     }
+
+    const getClicked = debounce(handleMessage, 3000)
+
+
     return (
         open && (
             <>
@@ -24,7 +34,7 @@ export default function Modal({ open, control }) {
                     <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
                         Send message
                     </h2>
-                    <form className="mt-8 space-y-6" onSubmit={handleMessage}>
+                    <form className="mt-8 space-y-6" onSubmit={() => getClicked()}>
                         <input type="hidden" name="remember" value="true" />
                         <div className="rounded-md shadow-sm -space-y-px">
                             <div>
@@ -49,7 +59,7 @@ export default function Modal({ open, control }) {
                                     onChange={(event) => setMessageData((prev) => ({ ...prev, text: event.target.value }))}
                                     id="message"
                                     name="message"
-                                    type="message"
+                                    type="text"
                                     required
                                     className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-violet-500 focus:border-violet-500 focus:z-10 sm:text-sm"
                                     placeholder="Message"
