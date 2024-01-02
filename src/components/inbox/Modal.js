@@ -1,11 +1,13 @@
 import { useState } from "react";
 import { useSpecifiedUserQuery } from "../../features/users/usersApi";
 import { useSelector } from "react-redux";
+import IsValidEmail from "../utils/IsValidEmail";
+import toast from "react-hot-toast";
+import Error from "../ui/Error";
 
 export default function Modal({ open, control }) {
-    // const [specifiedUser, { data, isLoading, error }] = useSpecifiedUserQuery();
     const [messageData, setMessageData] = useState({});
-
+    const { data: user, isLoading, error } = useSpecifiedUserQuery(messageData.email, { skip: !messageData.email });
 
     const debounce = (fn, delay) => {
         let timeoutId;
@@ -18,8 +20,17 @@ export default function Modal({ open, control }) {
     }
 
     const handleEmail = (event) => {
-        setMessageData((prev) => ({ ...prev, email: event.target.value }));
-        console.log(messageData, "email debounce")
+
+        const checkedEmail = IsValidEmail(event);
+        if (checkedEmail) {
+            setMessageData((prev) => ({ ...prev, email: event }));
+            if (user.length!==0) {
+                toast.error("User not found!");
+                console.log(user)
+            }
+        } else {
+            toast.error("Invalid Email!")
+        }
     }
 
     const getClicked = debounce(handleEmail, 700)
@@ -44,7 +55,7 @@ export default function Modal({ open, control }) {
                                     To
                                 </label>
                                 <input
-                                    onChange={(event) => getClicked(event)}
+                                    onChange={(event) => getClicked(event.target.value)}
                                     id="to"
                                     name="to"
                                     type="email"
@@ -78,7 +89,7 @@ export default function Modal({ open, control }) {
                             </button>
                         </div>
 
-                        {/* <Error message="There was an error" /> */}
+                        {user?.length === 0 && <Error message="This email does not exist!" />}
                     </form>
                 </div>
             </>
