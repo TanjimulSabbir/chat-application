@@ -11,8 +11,8 @@ export const conversationsApi = apiSlice.injectEndpoints({
             },
         }),
         findCoversationByEmail: builder.query({
-            query: ({ loginEmail, partnerEmail }) => ({
-                url: `/conversations?participants_like=${loginEmail}-${partnerEmail}&&participants_like=${partnerEmail}-${loginEmail}`,
+            query: ({ loggedInEmail, partnerEmail }) => ({
+                url: `/conversations?participants_like=${loggedInEmail}-${partnerEmail}&&participants_like=${partnerEmail}-${loggedInEmail}`,
             })
         }),
         editSpecifiedCoversation: builder.mutation({

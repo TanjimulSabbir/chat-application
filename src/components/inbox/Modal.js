@@ -1,13 +1,30 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useSpecifiedUserQuery } from "../../features/users/usersApi";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import IsValidEmail from "../utils/IsValidEmail";
 import toast from "react-hot-toast";
 import Error from "../ui/Error";
+import { conversationsApi } from "../../features/conversations/conversationsApi";
 
 export default function Modal({ open, control }) {
     const [messageData, setMessageData] = useState({});
+    const [searchedConversations, setSearchedConversations] = useState(null);
     const { data: user, isLoading, error } = useSpecifiedUserQuery(messageData.email, { skip: !messageData.email });
+
+    const { user: loggedInUser } = useSelector(state => state.auth) || {};
+    const dispatch = useDispatch();
+
+
+    useEffect(() => {
+        if (user?.length > 0) {
+            dispatch(conversationsApi.endpoints.findCoversationByEmail.initiate({ loggedInEmail: loggedInUser.email, partnerEmail: messageData.email })).unwrap().then((data) => {
+                setSearchedConversations(data)
+            }).catch(() => {
+
+            })
+        }
+    }, [user, dispatch, messageData, loggedInUser])
+
 
     const debounce = (fn, delay) => {
         let timeoutId;
@@ -19,15 +36,14 @@ export default function Modal({ open, control }) {
         }
     }
 
+
+
     const handleEmail = (event) => {
 
         const checkedEmail = IsValidEmail(event);
         if (checkedEmail) {
             setMessageData((prev) => ({ ...prev, email: event }));
-            if (user.length!==0) {
-                toast.error("User not found!");
-                console.log(user)
-            }
+
         } else {
             toast.error("Invalid Email!")
         }
@@ -83,7 +99,8 @@ export default function Modal({ open, control }) {
                         <div>
                             <button
                                 type="submit"
-                                className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-violet-600 hover:bg-violet-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-violet-500"
+                                className={`group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-violet-500 ${!searchedConversations || loggedInUser?.email === messageData?.email ? "bg-gray-300 text-blck" : "bg-green-500 hover:bg-violet-700"}`}
+                                disabled={searchedConversations == null || loggedInUser?.email === messageData?.email}
                             >
                                 Send Message
                             </button>
