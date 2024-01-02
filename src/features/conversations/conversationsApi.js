@@ -12,7 +12,7 @@ const conversationsApi = apiSlice.injectEndpoints({
         }),
         findCoversationByEmail: builder.query({
             query: ({ loginEmail, partnerEmail }) => ({
-                url: `/conversations?participants=${loginEmail}-${partnerEmail}&&participants=${partnerEmail}-${loginEmail}`,
+                url: `/conversations?participants_like=${loginEmail}-${partnerEmail}&&participants_like=${partnerEmail}-${loginEmail}`,
             })
         }),
         editSpecifiedCoversation: builder.mutation({

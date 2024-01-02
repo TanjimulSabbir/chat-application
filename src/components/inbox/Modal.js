@@ -1,13 +1,17 @@
 import { useState } from "react";
 import { useSpecifiedUserQuery } from "../../features/users/usersApi";
+import { useSelector } from "react-redux";
 
 export default function Modal({ open, control }) {
+    // const [specifiedUser, { data, isLoading, error }] = useSpecifiedUserQuery();
     const [messageData, setMessageData] = useState({});
-    const [specifiedUser, { data, isLoading }] = useSpecifiedUserQuery();
+
+    // if (isLoading) return <div>Loading..</div>
+    // console.log(error, "from modal");
 
     const handleMessage = (event) => {
         event.preventDefault();
-        specifiedUser(messageData.email)
+        // specifiedUser(messageData.email)
     }
     return (
         open && (
