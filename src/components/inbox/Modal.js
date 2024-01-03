@@ -4,13 +4,14 @@ import { useDispatch, useSelector } from "react-redux";
 import IsValidEmail from "../utils/IsValidEmail";
 import toast from "react-hot-toast";
 import Error from "../ui/Error";
-import { conversationsApi } from "../../features/conversations/conversationsApi";
+import { conversationsApi, useAddCoversationMutation, useConversationsQuery, useEditSpecifiedCoversationMutation } from "../../features/conversations/conversationsApi";
 
 export default function Modal({ open, control }) {
     const [messageData, setMessageData] = useState({});
     const [searchedConversations, setSearchedConversations] = useState(null);
     const { data: user, isLoading, error } = useSpecifiedUserQuery(messageData.email, { skip: !messageData.email });
-
+    const [addCoversation, { isSuccess: addedSuccessfully }] = useAddCoversationMutation();
+    const [editSpecifiedCoversation, { isSuccess: editedSuccessfully }] = useEditSpecifiedCoversationMutation();
     const { user: loggedInUser } = useSelector(state => state.auth) || {};
     const dispatch = useDispatch();
 
@@ -25,7 +26,6 @@ export default function Modal({ open, control }) {
         }
     }, [user, dispatch, messageData, loggedInUser])
 
-
     const debounce = (fn, delay) => {
         let timeoutId;
         return (...args) => {
@@ -35,7 +35,6 @@ export default function Modal({ open, control }) {
             }, delay);
         }
     }
-
     const handleEmail = (event) => {
         const checkedEmail = IsValidEmail(event);
         if (checkedEmail) {
@@ -50,6 +49,27 @@ export default function Modal({ open, control }) {
 
     const handleMessages = (event) => {
         event.preventDefault();
+        if (searchedConversations.length > 0) {
+            editSpecifiedCoversation({
+                id: searchedConversations[0].id,
+                data: {
+                    id: searchedConversations[0].id,
+                    participants: `${loggedInUser.email}-${messageData.email}`,
+                    users: [{ ...loggedInUser }, { ...user }],
+                    message: messageData.text,
+                    timestamp: new Date().getTime()
+                }
+            })
+        } else {
+            editSpecifiedCoversation({
+                id: searchedConversations[0].id,
+                participants: `${loggedInUser.email}-${messageData.email}`,
+                users: [{ ...loggedInUser }, { ...user }],
+                message: messageData.text,
+                timestamp: new Date().getTime()
+            })
+        }
+        console.log(searchedConversations, "from modal")
     }
 
 
