@@ -53,7 +53,6 @@ export default function Modal({ open, control }) {
             editSpecifiedCoversation({
                 id: searchedConversations[0].id,
                 data: {
-                    id: searchedConversations[0].id,
                     participants: `${loggedInUser.email}-${messageData.email}`,
                     users: [{ ...loggedInUser }, { ...user }],
                     message: messageData.text,
