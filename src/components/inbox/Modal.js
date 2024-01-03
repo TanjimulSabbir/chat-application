@@ -60,10 +60,10 @@ export default function Modal({ open, control }) {
             editSpecifiedCoversation(
                 {
                     id: searchedConversations[0].id,
-                    sender: loggedInUser, receiver: user,
+                    sender: loggedInUser, receiver: user[0],
                     data: {
                         participants: `${loggedInUser.email}-${messageData.email}`,
-                        users: [{ ...loggedInUser }, { ...user }],
+                        users: [{ ...loggedInUser }, { ...user[0] }],
                         message: messageData.text,
                         timestamp: new Date().getTime()
                     }
@@ -72,10 +72,10 @@ export default function Modal({ open, control }) {
             addCoversation(
                 {
                     id: searchedConversations[0].id,
-                    sender: loggedInUser, receiver: user,
+                    sender: loggedInUser, receiver: user[0],
                     data: {
                         participants: `${loggedInUser.email}-${messageData.email}`,
-                        users: [{ ...loggedInUser }, { ...user }],
+                        users: [{ ...loggedInUser }, { ...user[0] }],
                         message: messageData.text,
                         timestamp: new Date().getTime()
                     }
