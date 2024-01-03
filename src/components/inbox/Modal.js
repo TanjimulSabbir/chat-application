@@ -100,14 +100,15 @@ export default function Modal({ open, control }) {
                         <div>
                             <button
                                 type="submit"
-                                className={`group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-violet-500 ${!searchedConversations || loggedInUser?.email === messageData?.email ? "bg-gray-300 text-blck" : "bg-green-500 hover:bg-violet-700"}`}
-                                disabled={searchedConversations == null || loggedInUser?.email === messageData?.email}
+                                className={`group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white  transition-all duration-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-violet-500 ${user?.length === 0 || loggedInUser?.email === messageData.email ? "bg-gray-300 text-blck" : "bg-green-600 hover:bg-green-700"}`}
+                                disabled={user?.length < 0 || loggedInUser?.email === messageData.email}
                             >
                                 Send Message
                             </button>
                         </div>
 
                         {user?.length === 0 && <Error message="This email does not exist!" />}
+                        {loggedInUser?.email === messageData.email && <Error message="You can not send message to yourself!" />}
                     </form>
                 </div>
             </>
