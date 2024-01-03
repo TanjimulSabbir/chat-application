@@ -67,11 +67,12 @@ export default function Modal({ open, control }) {
                         message: messageData.text,
                         timestamp: new Date().getTime()
                     }
-                })
+                }
+            )
         } else {
             addCoversation(
                 {
-                    id: searchedConversations[0].id,
+                    id: searchedConversations[0]?.id,
                     sender: loggedInUser, receiver: user[0],
                     data: {
                         participants: `${loggedInUser.email}-${messageData.email}`,

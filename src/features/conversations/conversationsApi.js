@@ -28,7 +28,7 @@ export const conversationsApi = apiSlice.injectEndpoints({
                     dispatch(messagesApi.endpoints.addMessage.initiate(
                         {
                             data: {
-                                conversationId: arg.id,
+                                conversationId: successResponsed?.data?.id,
                                 sender: arg?.sender,
                                 receiver: arg?.receiver,
                                 message: arg?.data?.message,
@@ -41,16 +41,16 @@ export const conversationsApi = apiSlice.injectEndpoints({
         addCoversation: builder.mutation({
             query: ({ id, data, sender, receiver }) => ({
                 url: `/conversations`,
-                method: "PATCH",
+                method: "POST",
                 body: data
             }),
             async onQueryStarted(arg, { queryFulfilled, dispatch }) {
-                const successResponsed = await queryFulfilled
+                const successResponsed = await queryFulfilled;
                 if (successResponsed?.data?.id) {
                     dispatch(messagesApi.endpoints.addMessage.initiate(
                         {
                             data: {
-                                conversationId: arg.id,
+                                conversationId: successResponsed?.data?.id,
                                 sender: arg?.sender,
                                 receiver: arg?.receiver,
                                 message: arg?.data?.message,

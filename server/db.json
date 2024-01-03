@@ -25,46 +25,6 @@
   ],
   "conversations": [
     {
-      "id": 1,
-      "participants": "sumit@learnwithsumit.com-tanzimulislamsabbir@gmail.com",
-      "users": [
-        {
-          "email": "sumit@learnwithsumit.com",
-          "name": "Sumit Saha",
-          "id": 1
-        },
-        {
-          "email": "tanzimulislamsabbir@gmail.com",
-          "name": "Tanjimul Sabbir",
-          "id": 2
-        }
-      ],
-      "message": "How are you?",
-      "timestamp": 1661976143678
-    },
-    {
-      "id": 2,
-      "participants": "tanjimulsabbir.dev@gmail.com-sumit@learnwithsumit.com",
-      "users": [
-        {
-          "email": "tanjimulsabbir.dev@gmail.com",
-          "name": "Sabbir Developer",
-          "confirmPassword": "123456",
-          "agreed": true,
-          "id": 3
-        },
-        {
-          "email": "sumit@learnwithsumit.com",
-          "password": "$2a$10$CtHS.yCGS80jiuZx8yKEI.5zdiZykHF/6aPTDqpHl6ZqEFGISOHKO",
-          "name": "Sumit Saha",
-          "id": 1
-        }
-      ],
-      "message": "Hello",
-      "timestamp": 1704287303667
-    },
-    {
-      "id": 3,
       "participants": "tanzimulislamsabbir@gmail.com-tanjimulsabbir.dev@gmail.com",
       "users": [
         {
@@ -83,82 +43,35 @@
           "id": 3
         }
       ],
-      "message": "Okay, but I will see it later.",
-      "timestamp": 1704292939968
+      "message": "Yeah, I'm okay! What's about you?",
+      "timestamp": 1704294095401,
+      "id": 1
+    },
+    {
+      "participants": "tanjimulsabbir.dev@gmail.com-sumit@learnwithsumit.com",
+      "users": [
+        {
+          "email": "tanjimulsabbir.dev@gmail.com",
+          "name": "Sabbir Developer",
+          "confirmPassword": "123456",
+          "agreed": true,
+          "id": 3
+        },
+        {
+          "email": "sumit@learnwithsumit.com",
+          "password": "$2a$10$CtHS.yCGS80jiuZx8yKEI.5zdiZykHF/6aPTDqpHl6ZqEFGISOHKO",
+          "name": "Sumit Saha",
+          "id": 1
+        }
+      ],
+      "message": "Hello, sumit vaiya!",
+      "timestamp": 1704294027140,
+      "id": 2
     }
   ],
   "messages": [
     {
-      "id": 1,
       "conversationId": 1,
-      "sender": {
-        "email": "sumit@learnwithsumit.com",
-        "name": "Sumit Saha",
-        "id": 1
-      },
-      "receiver": {
-        "email": "tanzimulislamsabbir@gmail.com",
-        "name": "Tanjimul Sabbir",
-        "id": 2
-      },
-      "message": "Hello",
-      "timestamp": 1661976143557
-    },
-    {
-      "id": 2,
-      "conversationId": 1,
-      "sender": {
-        "email": "tanzimulislamsabbir@gmail.com",
-        "name": "Tanjimul Sabbir",
-        "id": 2
-      },
-      "receiver": {
-        "email": "sumit@learnwithsumit.com",
-        "name": "Sumit Saha",
-        "id": 1
-      },
-      "message": "How are you?",
-      "timestamp": 1661976143678
-    },
-    {
-      "id": 3,
-      "conversationId": 3,
-      "sender": {
-        "email": "tanzimulislamsabbir@gmail.com",
-        "name": "Tanjimul Sabbir",
-        "id": 2
-      },
-      "receiver": {
-        "email": "tanjimulsabbir.dev@gmail.com",
-        "name": "Sabbir Developer",
-        "id": 3
-      },
-      "message": "Hey?",
-      "timestamp": 1661976143678
-    },
-    {
-      "conversationId": 3,
-      "sender": {
-        "email": "tanzimulislamsabbir@gmail.com",
-        "name": "Tanjimul Islam Sabbir",
-        "confirmPassword": "123456",
-        "agreed": true,
-        "id": 2
-      },
-      "receiver": {
-        "email": "tanjimulsabbir.dev@gmail.com",
-        "password": "$2a$10$iEKjtxfK4M3Uoe2EhRvXO.6jPRlbWWr6x3CExKXfg0vq1veA/vd9y",
-        "name": "Sabbir Developer",
-        "confirmPassword": "123456",
-        "agreed": true,
-        "id": 3
-      },
-      "message": "Solving {...user[0]} problem!",
-      "timestamp": 1704292588578,
-      "id": 4
-    },
-    {
-      "conversationId": 3,
       "sender": {
         "email": "tanjimulsabbir.dev@gmail.com",
         "name": "Sabbir Developer",
@@ -174,12 +87,52 @@
         "agreed": true,
         "id": 2
       },
-      "message": "Okay, solve the problem. BUt frist off all go to partnerInfo component and solve problem there. This is the root finding problem. Solve it.",
-      "timestamp": 1704292752139,
+      "message": "kljh",
+      "timestamp": 1704293896098,
+      "id": 3
+    },
+    {
+      "conversationId": 1,
+      "sender": {
+        "email": "tanjimulsabbir.dev@gmail.com",
+        "name": "Sabbir Developer",
+        "confirmPassword": "123456",
+        "agreed": true,
+        "id": 3
+      },
+      "receiver": {
+        "email": "tanzimulislamsabbir@gmail.com",
+        "password": "$2a$10$uE/U0hjQ3kQXuWOc8qWKK.G45CXm0NsTl3fdJ4s8XiZeu5EsN1lUK",
+        "name": "Tanjimul Islam Sabbir",
+        "confirmPassword": "123456",
+        "agreed": true,
+        "id": 2
+      },
+      "message": "Hello, are you okay?\n",
+      "timestamp": 1704293989002,
+      "id": 4
+    },
+    {
+      "conversationId": 2,
+      "sender": {
+        "email": "tanjimulsabbir.dev@gmail.com",
+        "name": "Sabbir Developer",
+        "confirmPassword": "123456",
+        "agreed": true,
+        "id": 3
+      },
+      "receiver": {
+        "email": "sumit@learnwithsumit.com",
+        "password": "$2a$10$CtHS.yCGS80jiuZx8yKEI.5zdiZykHF/6aPTDqpHl6ZqEFGISOHKO",
+        "name": "Sumit Saha",
+        "id": 1
+      },
+      "message": "Hello, sumit vaiya!",
+      "timestamp": 1704294027140,
       "id": 5
     },
     {
-      "conversationId": 3,
+      "conversationId": 1,
       "sender": {
         "email": "tanzimulislamsabbir@gmail.com",
         "name": "Tanjimul Islam Sabbir",
@@ -195,8 +148,8 @@
         "agreed": true,
         "id": 3
       },
-      "message": "Okay, but I will see it later.",
-      "timestamp": 1704292939968,
+      "message": "Yeah, I'm okay! What's about you?",
+      "timestamp": 1704294095401,
       "id": 6
     }
   ]

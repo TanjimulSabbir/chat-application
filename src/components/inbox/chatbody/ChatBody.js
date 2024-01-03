@@ -24,8 +24,8 @@ export default function ChatBody() {
             <ChatHead
                 messages={messages && messages[0]}
             />
-            <Messages key={messages.id} messages={messages} email={email} />
-            <Options />
+            <Messages messages={messages} email={email} />
+            <Options messages={messages} />
         </div>
     }
 
