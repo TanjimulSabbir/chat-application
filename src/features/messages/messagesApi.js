@@ -8,7 +8,7 @@ export const messagesApi = apiSlice.injectEndpoints({
             })
         }),
         addMessage: builder.mutation({
-            query: (data) => ({
+            query: ({ data }) => ({
                 url: `/messages`,
                 method: "POST",
                 body: data

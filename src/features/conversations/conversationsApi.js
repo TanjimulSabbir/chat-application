@@ -1,4 +1,5 @@
 import { apiSlice } from "../Api/apiSlice";
+import { messagesApi } from "../messages/messagesApi";
 
 export const conversationsApi = apiSlice.injectEndpoints({
     endpoints: (builder) => ({
@@ -16,18 +17,48 @@ export const conversationsApi = apiSlice.injectEndpoints({
             })
         }),
         editSpecifiedCoversation: builder.mutation({
-            query: ({ id, data }) => ({
+            query: ({ id, data, sender, receiver }) => ({
                 url: `/conversations/${id}`,
                 method: "PATCH",
                 body: data
-            })
+            }),
+            async onQueryStarted(arg, { queryFulfilled, dispatch }) {
+                const successResponsed = await queryFulfilled
+                if (successResponsed?.data?.id) {
+                    dispatch(messagesApi.endpoints.addMessage.initiate(
+                        {
+                            data: {
+                                conversationId: arg.id,
+                                sender: arg?.sender,
+                                receiver: arg?.receiver,
+                                message: arg?.data?.message,
+                                timestamp: arg?.data?.timestamp
+                            }
+                        }))
+                }
+            }
         }),
         addCoversation: builder.mutation({
-            query: (data) => ({
+            query: ({ id, data, sender, receiver }) => ({
                 url: `/conversations`,
                 method: "PATCH",
                 body: data
-            })
+            }),
+            async onQueryStarted(arg, { queryFulfilled, dispatch }) {
+                const successResponsed = await queryFulfilled
+                if (successResponsed?.data?.id) {
+                    dispatch(messagesApi.endpoints.addMessage.initiate(
+                        {
+                            data: {
+                                conversationId: arg.id,
+                                sender: arg?.sender,
+                                receiver: arg?.receiver,
+                                message: arg?.data?.message,
+                                timestamp: arg?.data?.timestamp
+                            }
+                        }))
+                }
+            }
         }),
 
     })
