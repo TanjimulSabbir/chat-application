@@ -24,7 +24,14 @@ export default function Modal({ open, control }) {
 
             })
         }
-    }, [user, dispatch, messageData, loggedInUser])
+    }, [user, dispatch, messageData, loggedInUser]);
+
+    useEffect(() => {
+        if (addedSuccessfully || editedSuccessfully) {
+            control()
+        }
+    }, [addedSuccessfully, editedSuccessfully]);
+
 
     const debounce = (fn, delay) => {
         let timeoutId;
@@ -50,27 +57,31 @@ export default function Modal({ open, control }) {
     const handleMessages = (event) => {
         event.preventDefault();
         if (searchedConversations.length > 0) {
-            editSpecifiedCoversation({
-                id: searchedConversations[0].id,
-                data: {
-                    participants: `${loggedInUser.email}-${messageData.email}`,
-                    users: [{ ...loggedInUser }, { ...user }],
-                    message: messageData.text,
-                    timestamp: new Date().getTime()
-                }
-            })
+            editSpecifiedCoversation(
+                {
+                    id: searchedConversations[0].id,
+                    sender: loggedInUser, receiver: user,
+                    data: {
+                        participants: `${loggedInUser.email}-${messageData.email}`,
+                        users: [{ ...loggedInUser }, { ...user }],
+                        message: messageData.text,
+                        timestamp: new Date().getTime()
+                    }
+                })
         } else {
-            editSpecifiedCoversation({
-                id: searchedConversations[0].id,
-                participants: `${loggedInUser.email}-${messageData.email}`,
-                users: [{ ...loggedInUser }, { ...user }],
-                message: messageData.text,
-                timestamp: new Date().getTime()
-            })
+            addCoversation(
+                {
+                    id: searchedConversations[0].id,
+                    sender: loggedInUser, receiver: user,
+                    data: {
+                        participants: `${loggedInUser.email}-${messageData.email}`,
+                        users: [{ ...loggedInUser }, { ...user }],
+                        message: messageData.text,
+                        timestamp: new Date().getTime()
+                    }
+                })
         }
-        console.log(searchedConversations, "from modal")
     }
-
 
     return (
         open && (

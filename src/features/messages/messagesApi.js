@@ -1,6 +1,6 @@
 import { apiSlice } from "../Api/apiSlice";
 
-const messagesApi = apiSlice.injectEndpoints({
+export const messagesApi = apiSlice.injectEndpoints({
     endpoints: (builder) => ({
         messages: builder.query({
             query: (id) => ({
