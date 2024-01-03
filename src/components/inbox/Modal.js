@@ -16,7 +16,7 @@ export default function Modal({ open, control }) {
 
 
     useEffect(() => {
-        if (user?.length > 0) {
+        if (user?.length > 0 && loggedInUser?.email !== messageData.email) {
             dispatch(conversationsApi.endpoints.findCoversationByEmail.initiate({ loggedInEmail: loggedInUser.email, partnerEmail: messageData.email })).unwrap().then((data) => {
                 setSearchedConversations(data)
             }).catch(() => {
@@ -39,10 +39,10 @@ export default function Modal({ open, control }) {
     const handleEmail = (event) => {
         const checkedEmail = IsValidEmail(event);
         if (checkedEmail) {
-            setMessageData((prev) => ({ ...prev, email: event }));
-
+            setMessageData((prev) => ({ ...prev, email: event, isEmailValid: true }));
         } else {
-            toast.error("Invalid Email!")
+            setMessageData((prev) => ({ ...prev, isEmailValid: false }));
+            // toast.error("Invalid Email!")
         }
     }
 
@@ -100,15 +100,17 @@ export default function Modal({ open, control }) {
                         <div>
                             <button
                                 type="submit"
-                                className={`group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white  transition-all duration-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-violet-500 ${user?.length === 0 || loggedInUser?.email === messageData.email ? "bg-gray-300 text-blck" : "bg-green-600 hover:bg-green-700"}`}
-                                disabled={user?.length < 0 || loggedInUser?.email === messageData.email}
+                                className={`group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white  transition-all duration-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-violet-500 ${!messageData?.isEmailValid || user?.length === 0 || loggedInUser?.email === messageData.email ? "bg-gray-300 text-blck" : "bg-green-600 hover:bg-green-700"}`}
+                                disabled={!messageData?.isEmailValid || user?.length < 0 || loggedInUser?.email === messageData.email}
                             >
                                 Send Message
                             </button>
                         </div>
 
-                        {user?.length === 0 && <Error message="This email does not exist!" />}
+                        {messageData?.isEmailValid || <Error message="Invalid email address!" />}
+                        {messageData?.isEmailValid && user?.length === 0 && <Error message="This email does not exist!" />}
                         {loggedInUser?.email === messageData.email && <Error message="You can not send message to yourself!" />}
+
                     </form>
                 </div>
             </>
