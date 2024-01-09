@@ -22,6 +22,12 @@ export const conversationsApi = apiSlice.injectEndpoints({
                 body: data
             }),
             async onQueryStarted(arg, { queryFulfilled, dispatch }) {
+                apiSlice.util.updateQueryData("conversations", arg.sender.email, (draft) => {
+                    // don't use triple equal (===)due to cach data stored as text not as actual data
+                    const draftConversations = draft.find(data => data.id == arg.id)
+                    draftConversations.message = arg?.data?.message;
+                    draftConversations.message = arg?.data?.timestamp;
+                })
                 const successResponsed = await queryFulfilled
                 if (successResponsed?.data?.id) {
                     dispatch(messagesApi.endpoints.addMessage.initiate(
