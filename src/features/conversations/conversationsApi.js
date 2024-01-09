@@ -15,6 +15,7 @@ export const conversationsApi = apiSlice.injectEndpoints({
                 url: `/conversations?participants_like=${loggedInEmail}-${partnerEmail}&&participants_like=${partnerEmail}-${loggedInEmail}`,
             })
         }),
+
         editSpecifiedCoversation: builder.mutation({
             query: ({ id, data, sender, receiver }) => ({
                 url: `/conversations/${id}`,
@@ -22,7 +23,15 @@ export const conversationsApi = apiSlice.injectEndpoints({
                 body: data
             }),
             async onQueryStarted(arg, { queryFulfilled, dispatch }) {
-                const EditInvalidated = dispatch(apiSlice.util.updateQueryData("conversations", arg.sender.email, (draft) => {
+                // Data invaliding
+                const EditConversatinInvalidated = dispatch(apiSlice.util.updateQueryData("conversations", arg.sender.email, (draft) => {
+                    // don't use triple equal (===)due to cach data stored as text not as actual data
+                    const draftConversations = draft.find(data => data.id == arg.id)
+                    draftConversations.message = arg?.data?.message;
+                    draftConversations.timestamp = arg?.data?.timestamp;
+                }));
+
+                const EditMessageInvalidated = dispatch(apiSlice.util.updateQueryData("messages", arg.id, (draft) => {
                     // don't use triple equal (===)due to cach data stored as text not as actual data
                     const draftConversations = draft.find(data => data.id == arg.id)
                     draftConversations.message = arg?.data?.message;
@@ -46,7 +55,7 @@ export const conversationsApi = apiSlice.injectEndpoints({
                         ))
                     }
                 } catch (error) {
-                    EditInvalidated.undo()
+                    EditConversatinInvalidated.undo()
                 }
             }
         }),
@@ -58,7 +67,7 @@ export const conversationsApi = apiSlice.injectEndpoints({
             }),
             async onQueryStarted(arg, { queryFulfilled, dispatch }) {
 
-                const addInvalidated = dispatch(apiSlice.util.updateQueryData("conversations", arg.sender.email, (draft) => {
+                const addInvalidated = dispatch(apiSlice.util.updateQueryData("messages", arg.id, (draft) => {
                     draft.push(arg.data)
                 }));
 

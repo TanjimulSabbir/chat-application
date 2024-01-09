@@ -15,10 +15,7 @@ export default function Options({ messages }) {
         setMessage("")
     }, [isSuccess])
 
-
     const receiver = messages[0]?.receiver?.email === loggedInUser.email ? messages[0]?.sender : messages[0]?.receiver;
-
-
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -34,18 +31,6 @@ export default function Options({ messages }) {
             }
 
         })
-        console.log({
-            id: messages[0]?.conversationId,
-            sender: loggedInUser,
-            receiver: receiver,
-            data: {
-                participants: `${loggedInUser?.email}-${receiver?.email}`,
-                users: [{ ...loggedInUser }, { ...receiver }],
-                message,
-                timestamp: new Date().getTime()
-            }
-        }, "from options sending properties");
-
     }
     return (
         <form className="flex items-center justify-between w-full p-3 border-t border-gray-300"
