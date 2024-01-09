@@ -4,10 +4,13 @@ const http = require("http");
 const auth = require("json-server-auth");
 const jsonServer = require("json-server");
 
-const server = http.createServer(app)
+const server = http.createServer(app);
+const io = require("socket.io")(server);
 const router = jsonServer.router("db.json");
 const middlewares = jsonServer.defaults();
 const port = process.env.PORT || 9000;
+
+global.io = io;
 
 // Bind the router db to the app
 app.db = router.db;
