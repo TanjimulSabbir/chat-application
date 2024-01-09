@@ -31,17 +31,11 @@ export const conversationsApi = apiSlice.injectEndpoints({
                     draftConversations.timestamp = arg?.data?.timestamp;
                 }));
 
-                const EditMessageInvalidated = dispatch(apiSlice.util.updateQueryData("messages", arg.id, (draft) => {
-                    // don't use triple equal (===)due to cach data stored as text not as actual data
-                    const draftConversations = draft.find(data => data.id == arg.id)
-                    draftConversations.message = arg?.data?.message;
-                    draftConversations.timestamp = arg?.data?.timestamp;
-                }));
 
                 try {
                     const successResponsed = await queryFulfilled
                     if (successResponsed?.data?.id) {
-                        dispatch(messagesApi.endpoints.addMessage.initiate(
+                        const addMessageDispatchResponse = await dispatch(messagesApi.endpoints.addMessage.initiate(
                             {
                                 data:
                                 {
@@ -52,7 +46,12 @@ export const conversationsApi = apiSlice.injectEndpoints({
                                     timestamp: arg?.data?.timestamp
                                 }
                             }
-                        ))
+                        )).unwrap();
+
+                        // Pessimistically Messages updating
+                        dispatch(apiSlice.util.updateQueryData("messages", addMessageDispatchResponse.conversationId.toString(), (draft) => {
+                            draft.push(addMessageDispatchResponse)
+                        }));
                     }
                 } catch (error) {
                     EditConversatinInvalidated.undo()
@@ -67,7 +66,7 @@ export const conversationsApi = apiSlice.injectEndpoints({
             }),
             async onQueryStarted(arg, { queryFulfilled, dispatch }) {
 
-                const addInvalidated = dispatch(apiSlice.util.updateQueryData("messages", arg.id, (draft) => {
+                const addInvalidated = dispatch(apiSlice.util.updateQueryData("conversations", arg.id.toString(), (draft) => {
                     draft.push(arg.data)
                 }));
 
