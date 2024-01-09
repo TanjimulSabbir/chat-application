@@ -26,14 +26,16 @@ export const conversationsApi = apiSlice.injectEndpoints({
                 if (successResponsed?.data?.id) {
                     dispatch(messagesApi.endpoints.addMessage.initiate(
                         {
-                            data: {
+                            data:
+                            {
                                 conversationId: successResponsed?.data?.id,
                                 sender: arg?.sender,
                                 receiver: arg?.receiver,
                                 message: arg?.data?.message,
                                 timestamp: arg?.data?.timestamp
                             }
-                        }))
+                        }
+                    ))
                 }
             }
         }),
@@ -55,7 +57,8 @@ export const conversationsApi = apiSlice.injectEndpoints({
                                 message: arg?.data?.message,
                                 timestamp: arg?.data?.timestamp
                             }
-                        }))
+                        }
+                    ))
                 }
             }
         }),

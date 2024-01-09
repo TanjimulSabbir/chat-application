@@ -2,7 +2,7 @@
   "users": [
     {
       "email": "sumit@learnwithsumit.com",
-      "password": "$2a$10$CtHS.yCGS80jiuZx8yKEI.5zdiZykHF/6aPTDqpHl6ZqEFGISOHKO",
+      "password": "123456",
       "name": "Sumit Saha",
       "id": 1
     },
@@ -25,26 +25,25 @@
   ],
   "conversations": [
     {
-      "participants": "tanjimulsabbir.dev@gmail.com-tanzimulislamsabbir@gmail.com",
+      "participants": "tanzimulislamsabbir@gmail.com-tanjimulsabbir.dev@gmail.com",
       "users": [
+        {
+          "email": "tanzimulislamsabbir@gmail.com",
+          "name": "Tanjimul Islam Sabbir",
+          "confirmPassword": "123456",
+          "agreed": true,
+          "id": 2
+        },
         {
           "email": "tanjimulsabbir.dev@gmail.com",
           "name": "Sabbir Developer",
           "confirmPassword": "123456",
           "agreed": true,
           "id": 3
-        },
-        {
-          "email": "tanzimulislamsabbir@gmail.com",
-          "password": "$2a$10$uE/U0hjQ3kQXuWOc8qWKK.G45CXm0NsTl3fdJ4s8XiZeu5EsN1lUK",
-          "name": "Tanjimul Islam Sabbir",
-          "confirmPassword": "123456",
-          "agreed": true,
-          "id": 2
         }
       ],
-      "message": "OKya",
-      "timestamp": 1704391910193,
+      "message": "Okay",
+      "timestamp": 1704812800273,
       "id": 1
     },
     {
@@ -64,8 +63,8 @@
           "id": 1
         }
       ],
-      "message": "Hello, sumit vaiya!",
-      "timestamp": 1704294027140,
+      "message": "What data types does JavaScript support?",
+      "timestamp": 1704812839349,
       "id": 2
     }
   ],
@@ -272,6 +271,45 @@
       "message": "OKya",
       "timestamp": 1704391910193,
       "id": 12
+    },
+    {
+      "conversationId": 1,
+      "sender": {
+        "email": "tanzimulislamsabbir@gmail.com",
+        "name": "Tanjimul Islam Sabbir",
+        "confirmPassword": "123456",
+        "agreed": true,
+        "id": 2
+      },
+      "receiver": {
+        "email": "tanjimulsabbir.dev@gmail.com",
+        "name": "Sabbir Developer",
+        "confirmPassword": "123456",
+        "agreed": true,
+        "id": 3
+      },
+      "message": "Okay",
+      "timestamp": 1704812800273,
+      "id": 13
+    },
+    {
+      "conversationId": 2,
+      "sender": {
+        "email": "tanjimulsabbir.dev@gmail.com",
+        "name": "Sabbir Developer",
+        "confirmPassword": "123456",
+        "agreed": true,
+        "id": 3
+      },
+      "receiver": {
+        "email": "sumit@learnwithsumit.com",
+        "password": "$2a$10$CtHS.yCGS80jiuZx8yKEI.5zdiZykHF/6aPTDqpHl6ZqEFGISOHKO",
+        "name": "Sumit Saha",
+        "id": 1
+      },
+      "message": "What data types does JavaScript support?",
+      "timestamp": 1704812839349,
+      "id": 14
     }
   ]
 }
