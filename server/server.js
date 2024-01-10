@@ -10,6 +10,9 @@ const router = jsonServer.router("db.json");
 global.io = io;
 
 router.render = (req, res) => {
+    const path=req.path;
+    const method=req.method;
+    
     console.log(req.locals?.data)
     res.json(res.locals?.data)
 }
