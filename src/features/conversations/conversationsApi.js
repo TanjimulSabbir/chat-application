@@ -23,8 +23,8 @@ export const conversationsApi = apiSlice.injectEndpoints({
                     await cacheDataLoaded;
                     socket.on("conversation", (data) => {
                         updateCachedData((draft) => {
-                            console.log({conversationDraft:draft});
-                            
+                            console.log({ conversationDraft: draft });
+
                             const conversation = draft.find(d => d.id === data?.data?.id);
                             if (conversation?.id) {
                                 conversation.message = data.data.message;
@@ -36,7 +36,8 @@ export const conversationsApi = apiSlice.injectEndpoints({
                     })
                 }
                 catch (err) {
-
+                    await cacheEntryRemoved;
+                    socket.close();
                 }
             }
         }),
