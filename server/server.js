@@ -12,7 +12,7 @@ global.io = io;
 router.render = (req, res) => {
     const path = req.path;
     const method = req.method;
-    if (path.includes("/conversations") && (method === "POST" || method === "PATCh")) {
+    if (path.includes("/conversations") && (method === "POST" || method === "PATCH")) {
         io.emit("conversation", {
             data: res.locals.data
         })
