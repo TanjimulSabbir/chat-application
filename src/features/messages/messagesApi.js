@@ -23,8 +23,8 @@ export const messagesApi = apiSlice.injectEndpoints({
                     socket.on("message", (data) => {
 
                         updateCachedData((draft) => {
-
                             const draftMessage = draft.find(d => d.id === data?.data?.id);
+                            console.log({ draftMessage })
                             if (draftMessage?.id) {
                                 draftMessage.message = data.data.message;
                                 draftMessage.timestamp = data.data.timestamp;
