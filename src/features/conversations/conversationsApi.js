@@ -1,3 +1,4 @@
+import { io } from "socket.io-client";
 import { apiSlice } from "../Api/apiSlice";
 import { messagesApi } from "../messages/messagesApi";
 
@@ -9,6 +10,17 @@ export const conversationsApi = apiSlice.injectEndpoints({
                     url: `/conversations?participants_like=${email}&_sort=timestamp&_order=desc&_page=1`,
                 };
             },
+            async onCacheEntryAdded(arg, { updateCachedData, cacheDataLoaded, cacheEntryRemoved }) {
+                const socket = io("http://localhost:9000", {
+                    reconnectionDelay: 1000,
+                    reconnection: true,
+                    reconnectionAttempts: 10,
+                    transports: ["websocket"],
+                    agent: false,
+                    upgrade: false,
+                    rejectUnauthorized: false,
+                })
+            }
         }),
         findCoversationByEmail: builder.query({
             query: ({ loggedInEmail, partnerEmail }) => ({
