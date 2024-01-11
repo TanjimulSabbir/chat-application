@@ -14,21 +14,17 @@ router.render = (req, res) => {
     const method = req.method;
     const clientRequestPaths = ["/conversations", "/messages"];
 
-    if (clientRequestPaths.includes(path) && (method === "POST" || method === "PATCH")) {
-        switch (path) {
-            case "/conversations":
-                io.emit("conversation", { data: res.locals.data });
-                break;
-            case "/messages":
-                io.emit("message", { data: res.locals.data });
-                break;
-            default:
-                // Handle other cases if needed
-                break;
-        }
+    if (path.includes("/conversations") && (method === "POST" || method === "PATCH")) {
+        io.emit("conversation", {
+            data: res.locals.data
+        })
+    }
+    else if (path.includes("/messages") && (method === "POST" || method === "PATCH")) {
+        io.emit("message", {
+            data: res.locals.data
+        })
     }
 
-    console.log(req.locals?.data)
     res.json(res.locals?.data)
 }
 
