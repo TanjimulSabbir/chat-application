@@ -5,11 +5,8 @@ import { messagesApi } from "../messages/messagesApi";
 export const conversationsApi = apiSlice.injectEndpoints({
     endpoints: (builder) => ({
         conversations: builder.query({
-            query: (email) => {
-                return {
-                    url: `/conversations?participants_like=${email}&_sort=timestamp&_order=desc&_page=1`,
-                };
-            },
+            query: (email) => `/conversations?participants_like=${email}&_sort=timestamp&_order=desc&_page=1`,
+
             // Create socket
             async onCacheEntryAdded(arg, { updateCachedData, cacheDataLoaded, cacheEntryRemoved }) {
                 const socket = io("http://localhost:9000", {
@@ -21,16 +18,19 @@ export const conversationsApi = apiSlice.injectEndpoints({
                     upgrade: false,
                     rejectUnauthorized: false,
                 });
+
                 try {
                     await cacheDataLoaded;
-                    socket.io("conversation", (data) => {
+                    socket.on("conversation", (data) => {
+                        console.log({ data }, "from socket ");
+
                         updateCachedData((draft) => {
-                            const conversation = draft.find(d => d.id === data.data.id);
+                            const conversation = draft.find(d => d.id === data?.data?.id);
                             if (conversation?.id) {
                                 conversation.message = data.data.message;
                                 conversation.timestamp = data.data.timestamp;
                             } else {
-                                draft.push(data)
+                                // nothing
                             }
                         })
                     })
@@ -40,6 +40,7 @@ export const conversationsApi = apiSlice.injectEndpoints({
                 }
             }
         }),
+
         findCoversationByEmail: builder.query({
             query: ({ loggedInEmail, partnerEmail }) => ({
                 url: `/conversations?participants_like=${loggedInEmail}-${partnerEmail}&&participants_like=${partnerEmail}-${loggedInEmail}`,
