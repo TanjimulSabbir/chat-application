@@ -15,12 +15,12 @@ export default function Modal({ open, control }) {
     const { user: loggedInUser } = useSelector(state => state.auth) || {};
     const dispatch = useDispatch();
 
-
+   
     useEffect(() => {
         if (user?.length > 0 && loggedInUser?.email !== messageData.email) {
             dispatch(conversationsApi.endpoints.findCoversationByEmail.initiate({ loggedInEmail: loggedInUser.email, partnerEmail: messageData.email })).unwrap().then((data) => {
                 setSearchedConversations(data)
-            }).catch(() => {
+            }).catch((err) => {
 
             })
         }
