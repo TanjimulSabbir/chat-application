@@ -63,7 +63,6 @@ export const conversationsApi = apiSlice.injectEndpoints({
                     draftConversations.timestamp = arg?.data?.timestamp;
                 }));
 
-
                 try {
                     const successResponsed = await queryFulfilled
                     if (successResponsed?.data?.id) {
