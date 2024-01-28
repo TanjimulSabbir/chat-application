@@ -2,8 +2,7 @@
 <!-- PROJECT LOGO -->
 <br />
 <p align="center">
-    <img src="https://avatars.githubusercontent.com/u/73503432?v=4" alt="Logo" width="80" height="80" />
-    <h3 align="center"><a href="https://learnwithsumit.com">THINK IN A REDUX WAY - MODULE 9 - LESSON 2 </a></h3>
+    <h3 align="center">THINK IN A REDUX WAY - MODULE 9 - LESSON 2</h3>
 </p>
 
 # Project Plan - Chat Application with RTK Query
